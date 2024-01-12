@@ -76,7 +76,7 @@ pipeline{
             }
         }
 
-        stage("setting makefile"){
+        stage("makes"){
             steps{
                 script{
                    dir('EKS/k8s'){
