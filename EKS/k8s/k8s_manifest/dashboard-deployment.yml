@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dashboard
-        image: neenopaltest/mokkup:dashboard-2.0
+        image: neenopaltest/mokkup:dashboard-7.0
         ports:
         - containerPort: 8001
       imagePullSecrets:
