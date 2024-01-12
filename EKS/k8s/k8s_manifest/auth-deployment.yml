@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: neenopaltest/mokkup:auth-2.0
+        image: neenopaltest/mokkup:auth_sentry
         ports:
         - containerPort: 8000
       imagePullSecrets:
