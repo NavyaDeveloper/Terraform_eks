@@ -35,3 +35,12 @@ deploy_application:
 
 delete_application:
         kustomize build ./k8s_manifest | kubectl delete -f -
+
+eksctl:
+        curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+
+eksctl_mv:
+        mv /tmp/eksctl /usr/local/bin
+
+
+        
