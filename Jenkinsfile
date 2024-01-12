@@ -71,7 +71,7 @@ pipeline{
                 script{
                         sh 'curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp'
                         sh 'sudo mv /tmp/eksctl /usr/local/bin'
-                        sh 'kubectl create secret docker-registry reg-cred --docker-server=docker.io --docker-username=neenopaltest --docker-password=Navya#1314 --docker-email=navya.animone@neenopal.com'      
+                        sh 'sudo kubectl create secret docker-registry reg-cred --docker-server=docker.io --docker-username=neenopaltest --docker-password=Navya#1314 --docker-email=navya.animone@neenopal.com'      
                 }
             }
         }
@@ -80,11 +80,11 @@ pipeline{
             steps{
                 script{
                    dir('EKS/k8s'){
-                        sh 'make enable_iam_sa_provider'
-                        sh 'make create_cluster_role'
-                        sh 'make create_iam_policy'
-                        sh 'make create_service_account'
-                        sh 'make deploy_cert_manager'
+                        sh 'sudo make enable_iam_sa_provider'
+                        sh 'sudo make create_cluster_role'
+                        sh 'sudo make create_iam_policy'
+                        sh 'sudo make create_service_account'
+                        sh 'sudo make deploy_cert_manager'
                    }
                 }
             }
@@ -96,9 +96,9 @@ pipeline{
                         sh 'sudo curl -Lo v2_5_4_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml'
                         sh 'sudo sed -i.bak -e "596,604d" ./v2_5_4_full.yaml'
                         sh 'sudo sed -i.bak -e "s|your-cluster-name|my-cluster|" ./v2_5_4_full.yaml'
-                        sh 'kubectl apply -f v2_5_4_full.yaml'
-                        sh 'curl -Lo v2_5_4_ingclass.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_ingclass.yaml'
-                        sh 'kubectl apply -f v2_5_4_ingclass.yaml'
+                        sh 'sudo kubectl apply -f v2_5_4_full.yaml'
+                        sh 'sudo curl -Lo v2_5_4_ingclass.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_ingclass.yaml'
+                        sh 'sudo kubectl apply -f v2_5_4_ingclass.yaml'
                 }
             }
         }

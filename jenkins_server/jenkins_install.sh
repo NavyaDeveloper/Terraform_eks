@@ -23,3 +23,11 @@ sudo yum -y install terraform
 sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
 sudo chmod +x ./kubectl
 sudo mkdir -p $HOME/bin && sudo cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+
+#installing make and docker 
+sudo yum install make -y
+sudo yum install docker -y
+sudo systemctl start docker 
+sudo systemctl enable docker 
+
+#installing eksctl
