@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: blog
-        image: neenopaltest/mokkup:blog-3.0
+        image: neenopaltest/mokkup:blog_sentry
         ports:
         - containerPort: 8002
       imagePullSecrets:
