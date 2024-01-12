@@ -93,9 +93,9 @@ pipeline{
         stage("setting makefile"){
             steps{
                 script{
-                        sh 'curl -Lo v2_5_4_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml'
-                        sh 'sed -i.bak -e '596,604d' ./v2_5_4_full.yaml'
-                        sh 'sed -i.bak -e 's|your-cluster-name|my-cluster|' ./v2_5_4_full.yaml'
+                        sh 'sudo curl -Lo v2_5_4_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml'
+                        sh 'sudo sed -i.bak -e '596,604d' ./v2_5_4_full.yaml'
+                        sh 'sudo sed -i.bak -e 's|your-cluster-name|my-cluster|' ./v2_5_4_full.yaml'
                         sh 'kubectl apply -f v2_5_4_full.yaml'
                         sh 'curl -Lo v2_5_4_ingclass.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_ingclass.yaml'
                         sh 'kubectl apply -f v2_5_4_ingclass.yaml'
