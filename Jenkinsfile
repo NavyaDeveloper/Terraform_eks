@@ -66,6 +66,43 @@ pipeline{
             }
         }
 
+        stage("Installing tools"){
+            steps{
+                script{
+                        sh 'curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp'
+                        sh 'sudo mv /tmp/eksctl /usr/local/bin'
+                        sh 'kubectl create secret docker-registry reg-cred --docker-server=docker.io --docker-username=neenopaltest --docker-password=Navya#1314 --docker-email=navya.animone@neenopal.com'      
+                }
+            }
+        }
+
+        stage("setting makefile"){
+            steps{
+                script{
+                   dir('EKS/k8s'){
+                        sh 'make enable_iam_sa_provider'
+                        sh 'make create_cluster_role'
+                        sh 'make create_iam_policy'
+                        sh 'make create_service_account'
+                        sh 'make deploy_cert_manager'
+                   }
+                }
+            }
+        }
+
+        stage("setting makefile"){
+            steps{
+                script{
+                        sh 'curl -Lo v2_5_4_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_full.yaml'
+                        sh 'sed -i.bak -e '596,604d' ./v2_5_4_full.yaml'
+                        sh 'sed -i.bak -e 's|your-cluster-name|my-cluster|' ./v2_5_4_full.yaml'
+                        sh 'kubectl apply -f v2_5_4_full.yaml'
+                        sh 'curl -Lo v2_5_4_ingclass.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.5.4/v2_5_4_ingclass.yaml'
+                        sh 'kubectl apply -f v2_5_4_ingclass.yaml'
+                }
+            }
+        }
+
         stage("Deploying services"){
             steps{
                 script{
@@ -74,6 +111,7 @@ pipeline{
                         sh 'kubectl apply -f auth-deployment.yml'
                         sh 'kubectl apply -f blog-deployment.yml'
                         sh 'kubectl apply -f dashboard-deployment.yml'
+                        sh 'kubectl apply -f ingress.yml'
                    }
                 }
             }
