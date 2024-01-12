@@ -69,7 +69,7 @@ pipeline{
         stage("Installing tools"){
             steps{
                 script{
-                        sh 'curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp'
+                        sh 'sudo curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp'
                         sh 'sudo mv /tmp/eksctl /usr/local/bin'
                         sh 'sudo kubectl create secret docker-registry reg-cred --docker-server=docker.io --docker-username=neenopaltest --docker-password=Navya#1314 --docker-email=navya.animone@neenopal.com'      
                 }
