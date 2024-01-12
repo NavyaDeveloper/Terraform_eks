@@ -14,5 +14,17 @@ pipeline{
                 }
             }
         }
+
+        stage("Initializing Terraform"){
+            steps{
+                script{
+                   dir('EKS'){
+                    sh 'terraform init'
+                   }
+                }
+            }
+        }
+
+        
     }
 }
