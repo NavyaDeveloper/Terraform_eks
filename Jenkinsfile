@@ -70,8 +70,8 @@ pipeline{
             steps{
                 script{
                     dir('EKS/k8s'){
-                        sh 'sudo make eksctl'
-                        sh 'sudo make eksctl_mv'
+                        sh 'make eksctl'
+                        sh 'make eksctl_mv'
                     }
                        withCredentials([usernamePassword(credentialsId: 'dockerhub_cred', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
       sh 'kubectl create secret docker-registry reg-cred --docker-server=docker.io --docker-username=$DOCKER_USERNAME --docker-password=$DOCKER_PASSWORD --docker-email=navya.animone@neenopal.com'      
