@@ -7,7 +7,7 @@ pipeline{
     }
        
     stages{
-        stage("checkout"){
+        stage("checjjkout"){
             steps{
                 script{
                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/NavyaDeveloper/Terraform_eks.git']])
