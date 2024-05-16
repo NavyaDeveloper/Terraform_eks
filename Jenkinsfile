@@ -35,7 +35,7 @@ pipeline{
             }
         }
 
-        stage("Validating Terraform"){
+        stage("Validating Terraformcmds"){
             steps{
                 script{
                    dir('EKS'){
